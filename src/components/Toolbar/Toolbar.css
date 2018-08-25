@@ -14,6 +14,10 @@
   padding: 0 1rem;
 }
 
+.toolbar__logo {
+  margin-left: 1rem;
+}
+
 .toolbar__logo a {
   color: #999;
   text-decoration: none;
@@ -43,5 +47,20 @@
 
 .spacer_1 {
   flex: 1;
+}
+
+@media (max-width: 768px) {
+  .toolbar__items {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .toolbar__toggle-button {
+    display: none;
+  }
+  .toolbar__logo {
+    margin-left: 0;
+  }
 }
 
