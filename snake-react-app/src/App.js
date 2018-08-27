@@ -6,7 +6,7 @@ const GRID_SIZE = 35;
 const GRID = [];
 
 const TICK_RATE = 100;
-const DIRECTION = { RIGHT:'RIGHT', LEFT:'LEFT', UP:'UP', DOWN:'DOWN' };
+// const DIRECTION = { RIGHT:'RIGHT', LEFT:'LEFT', UP:'UP', DOWN:'DOWN' };
 const DIRECTION_TICKS = {
   RIGHT: (x,y) => ({ x: x+1, y }), 
   LEFT: (x,y) => ({ x: x-1, y }), 
@@ -29,13 +29,32 @@ for (var i = 0; i <= GRID_SIZE; i++) {
 // console.log(GRID);
 
 const isBorder = (x, y) => x === 0 || y === 0 || x === GRID_SIZE || y === GRID_SIZE;
+
 const isPosition = (x, y, diffX, diffY) => x === diffX && y === diffY;
+
+const isSnake = (x, y, coordinates) => coordinates.filter(c => isPosition(x, y, c.x, c.y)).length;
 
 
 const getCellCs = (x, y, snake, snack) => cs('grid-cell',{
   'grid-cell-border': isBorder(x,y),
-  'grid-cell-snake': isPosition(x, y, snake.coordinates.x, snake.coordinates.y),
+  'grid-cell-snake': isSnake(x, y, snake.coordinates),
   'grid-cell-snack': isPosition(x, y, snack.coordinates.x, snack.coordinates.y),
+});
+
+const getSnakeHead = (snake) => snake.coordinates[0];
+
+const getIsSnakeEating = ({ snake, snack }) => {
+  // console.log(snake,snack);
+  return isPosition(getSnakeHead(snake).x, getSnakeHead(snake).y, snack.coordinates.x, snack.coordinates.y)
+};
+
+const getSnakeWithOutStub = (snake) =>  snake.coordinates.slice(0, snake.coordinates.length - 1);
+
+const  getRandomFromRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
+const getRandomCoordinates = () => ({ 
+  x: getRandomFromRange(1, GRID_SIZE - 1),
+  y: getRandomFromRange(1, GRID_SIZE - 1),
 });
 
 const applySnakePosition = prevState => {
@@ -72,12 +91,25 @@ const applySnakePosition = prevState => {
   //   }
   // }
 
-  const directionFunction = DIRECTION_TICKS[prevState.playground.direction];
-  const coordinates = directionFunction(prevState.snake.coordinates.x, prevState.snake.coordinates.y);
+  const isSnakeEating = getIsSnakeEating(prevState);
+  // console.log(prevState);
+
+  const snakeHead = DIRECTION_TICKS[prevState.playground.direction](
+    getSnakeHead(prevState.snake).x,
+    getSnakeHead(prevState.snake).y
+  );
+  // const coordinates = snakeHead(prevState.snake.coordinates.x, prevState.snake.coordinates.y);
+
+  const snakeTail = isSnakeEating ? prevState.snake.coordinates : getSnakeWithOutStub(prevState.snake);
+
+  const snackCoordinates = isSnakeEating ? getRandomCoordinates() : prevState.snack.coordinates;
 
   return {
     snake: {
-      coordinates,
+      coordinates: [snakeHead, ...snakeTail],
+    },
+    snack: {
+      coordinates: snackCoordinates,
     }
   }
 
@@ -94,15 +126,15 @@ class App extends Component {
         direction: 'RIGHT',
       },
       snake: {
-        coordinates: {
+        coordinates: [{
           x: 20,
           y: 20,
-        }
+        }]
       },
       snack: {
         coordinates: {
-          x: 10,
-          y: 10,
+          x: 25,
+          y: 20,
         }
       }
     };
