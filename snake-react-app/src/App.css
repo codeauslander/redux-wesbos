@@ -17,3 +17,9 @@
 .grid-cell-border {
   background-color: black;
 }
+.grid-cell-snake {
+  background-color: green;
+}
+.grid-cell-snack {
+  background-color: blue;
+}
