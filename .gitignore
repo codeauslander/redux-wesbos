@@ -1,15 +1,25 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
+/node_modules
 /flexbox/node_modules
 /local-state-basic/node_modules
 /snake-react-app/node_modules
+/local-state-advanced/node_modules
 
 # testing
 /coverage
+/flexbox/coverage
+/local-state-basic/coverage
+/snake-react-app/coverage
+/local-state-advanced/coverage
 
 # production
 /build
+/flexbox/build
+/local-state-basic/build
+/snake-react-app/build
+/local-state-advanced/build
 
 # misc
 .DS_Store
