@@ -143,10 +143,44 @@ class App extends Component {
         isGameOver: false,
       },
       snake: {
-        coordinates: [{
-          x: 20,
-          y: 20,
-        }]
+        coordinates: [
+          {
+            x: 20,
+            y: 20,
+          },
+          {
+            x: 19,
+            y: 20,
+          },
+          {
+            x: 18,
+            y: 20,
+          },
+          {
+            x: 17,
+            y: 20,
+          },
+          {
+            x: 16,
+            y: 20,
+          },
+          {
+            x: 15,
+            y: 20,
+          },
+          {
+            x: 14,
+            y: 20,
+          },
+          {
+            x: 13,
+            y: 20,
+          },
+          {
+            x: 12,
+            y: 20,
+          }
+        ]
       },
       snack: {
         coordinates: {
