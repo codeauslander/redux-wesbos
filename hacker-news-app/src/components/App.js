@@ -10,12 +10,12 @@ const App = ({stories}) => {
       <Stories stories={stories} />
     </div>
   );
-}
-
+};
 
 App.propTypes = {
   stories: PropTypes.array,
-}
+};
+
 App.defaultProps = {
   stories: [],
 };

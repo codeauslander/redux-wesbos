@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Story.css';
 
-const Story = ({ story }) => {
+const Story = ({ story, columns }) => {
   const { 
     title,
     url,
@@ -13,17 +13,19 @@ const Story = ({ story }) => {
   
   return (
     <div className='story'> 
-      <span>
+      <span style={{ width: columns.title.width }}>
         <a href={url}>{title}</a>
       </span>
-      <span>
+      <span style={{ width: columns.author.width }}>
         {author}
       </span>
-      <span>
+      <span style={{ width: columns.comments.width }}>
         {num_comments}
       </span>
-      <span>
+      <span style={{ width: columns.points.width }}>
         {points}
+      </span>
+      <span style={{ width: columns.archive.width }}>
       </span>
     </div>
   );
