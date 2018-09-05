@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Story.css';
+import Button from './Button';
 
-const Story = ({ story, columns }) => {
+const Story = ({ story, columns, onArchive  }) => {
   const { 
     title,
     url,
     author,
     num_comments,
     points,
+    objectID,
   } = story;
   
   return (
@@ -26,6 +28,9 @@ const Story = ({ story, columns }) => {
         {points}
       </span>
       <span style={{ width: columns.archive.width }}>
+        <Button className='button-inline' onClick={ () => onArchive(objectID) }>
+          Archive
+        </Button>
       </span>
     </div>
   );

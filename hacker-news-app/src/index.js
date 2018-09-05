@@ -11,7 +11,7 @@ const stories = [
     author: 'Jordan Walkie',
     num_comments: 3,
     points: 4,
-    objectId: 0,
+    objectID: 0,
   },
   {
     title: 'Redux',
@@ -19,12 +19,12 @@ const stories = [
     author: 'Dan Abramov, Andrew Clark',
     num_comments: 2,
     points: 5,
-    objectId: 1,
+    objectID: 1,
   },
 ];
 
 ReactDOM.render(
-  <App stories={ stories } />, 
+  <App stories={ stories } onArchive={ (objectID) => { console.log(objectID) } }/>, 
   document.getElementById('root')
 );
 registerServiceWorker();
