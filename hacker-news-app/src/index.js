@@ -3,28 +3,28 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
+import store from './store/index';
+// import archiveReducer from './reducers/archive';
+import { STORY_ARCHIVE } from './constants/actionTypes';
+import { getReadebleStories } from './selectors/story';
 
-const stories = [
-  {
-    title: 'React',
-    url: 'https://facebook.github.io/react/',
-    author: 'Jordan Walkie',
-    num_comments: 3,
-    points: 4,
-    objectID: 0,
-  },
-  {
-    title: 'Redux',
-    url: 'https://facebook.github.io/reactjs/redux/',
-    author: 'Dan Abramov, Andrew Clark',
-    num_comments: 2,
-    points: 5,
-    objectID: 1,
-  },
-];
+console.log(store.getState());
 
-ReactDOM.render(
-  <App stories={ stories } onArchive={ (objectID) => { console.log(objectID) } }/>, 
-  document.getElementById('root')
-);
+
+
+const render = () => {
+  ReactDOM.render(
+    <App 
+      // stories={ store.getState().storyState } 
+      stories={ getReadebleStories(store.getState()) } 
+      // onArchive={ (objectID) => { console.log(objectID) } }
+      onArchive={ id => store.dispatch({type: STORY_ARCHIVE, id}) }
+    />, 
+    document.getElementById('root')
+  );
+};
+
+render();
+
+store.subscribe(render);
 registerServiceWorker();
