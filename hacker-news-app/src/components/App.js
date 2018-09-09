@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import './App.css';
 import Stories from './Stories';
 
-const App = ({stories, onArchive}) => {
-  console.log(stories);
+// const App = ({stories, onArchive}) => {
+  const App = () => {
+  // console.log(stories); 
   return (
     <div className='app'>
       <Stories 
-        stories={stories} 
-        onArchive={onArchive}
+        // stories={stories} 
+        // onArchive={onArchive}
       />
     </div>
   );
