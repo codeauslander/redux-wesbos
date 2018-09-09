@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Stories.css';
 import Story from './Story';
 import { connect } from 'react-redux';
-import { doArchiveStory } from '../actions/archive';
+// import { doArchiveStory } from '../actions/archive';
 import { getReadebleStories } from '../selectors/story';
 
 const COLUMNS = {
@@ -28,7 +28,8 @@ const COLUMNS = {
   },
 };
 
-const Stories = ({ stories, onArchive }) => {
+// const Stories = ({ stories, onArchive }) => {
+  const Stories = ({ stories }) => {
   console.log(stories);
   return (
     <div className='stories'>
@@ -40,7 +41,7 @@ const Stories = ({ stories, onArchive }) => {
           key={story.objectID} 
           story={story} 
           columns={COLUMNS} 
-          onArchive={onArchive}
+          // onArchive={onArchive}
         />
       )}
     </div>
@@ -63,9 +64,9 @@ const mapStateToProps = state => ({
   stories: getReadebleStories(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  onArchive: id => dispatch(doArchiveStory(id)),
-});
+// const mapDispatchToProps = dispatch => ({
+//   onArchive: id => dispatch(doArchiveStory(id)),
+// });
 
   
 
@@ -82,5 +83,5 @@ Stories.defaultProps = {
 // export default Stories;
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  // mapDispatchToProps,
 )(Stories) ;

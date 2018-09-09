@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Story.css';
 import Button from './Button';
+import { connect } from 'react-redux';
+import { doArchiveStory } from '../actions/archive';
 
 const Story = ({ story, columns, onArchive  }) => {
   const { 
@@ -38,10 +40,17 @@ const Story = ({ story, columns, onArchive  }) => {
 
 Story.propTypes = {
   story: PropTypes.object,
-}
-
+};
+ 
 Story.defaultProps = {
   story: {},
-}
+};
 
-export default Story;
+const mapDispatchToProps = dispatch => ({
+  onArchive: id => dispatch( doArchiveStory(id) ),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Story);
