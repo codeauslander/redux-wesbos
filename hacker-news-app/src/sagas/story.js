@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { doAddStories } from '../actions/story';
+import { doAddStories, doFetchStoriesError } from '../actions/story';
 import { fetchStories } from '../api/story';
 
 // const HN_BASE_URL = 'http://hn.algolia.com/api/v1/search?query=';
@@ -9,12 +9,17 @@ import { fetchStories } from '../api/story';
 //         .then( response => response.json() );
 
 function* handleFetchStories(action) {
-    const { query } = action;
+  const { query } = action;
+  try {
     const result = yield call(fetchStories, query);
     yield put(doAddStories(result.hits));
+  } catch (error) {
+    yield put(doFetchStoriesError(error));
+  }
+    
 }
 
 export {
-    handleFetchStories,
-    fetchStories
+  handleFetchStories,
+  fetchStories
 };

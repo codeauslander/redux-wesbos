@@ -3,9 +3,12 @@ const isNotArchived = (archivedIds) => {
 } ;
 
 const getReadebleStories = ({ storyState, archiveState }) => {
-  return storyState.filter(isNotArchived(archiveState));
+  return storyState.stories.filter(isNotArchived(archiveState));
 };
+
+const getFetchError = ({ storyState }) => storyState.error;
 
 export {
   getReadebleStories,
+  getFetchError,
 };
