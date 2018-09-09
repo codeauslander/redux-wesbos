@@ -10,8 +10,6 @@ import { getReadebleStories } from './selectors/story';
 
 console.log(store.getState());
 
-
-
 const render = () => {
   ReactDOM.render(
     <App 
